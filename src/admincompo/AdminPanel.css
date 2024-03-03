@@ -1,0 +1,73 @@
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  main {
+    margin-top: 40px;
+  }
+}
+
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the admin panel covers the full height of the viewport */
+}
+
+header {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center; /* Align items vertically */
+}
+
+.menu-toggle {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.menu-sidebar {
+  width: 200px;
+  background-color: #343a40;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-sidebar nav ul li {
+  margin-bottom: 10px;
+}
+
+.menu-sidebar nav ul li a {
+  color: #f8f9fa;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu-sidebar nav ul li a:hover {
+  color: #ced4da;
+}
+
+main {
+  flex: 1;
+  overflow-y: auto; /* Add scrollbar if content overflows */
+  padding: 20px;
+}
+
+footer {
+  background-color: #343a40;
+  color: #fff;
+  padding: 10px 20px;
+}
