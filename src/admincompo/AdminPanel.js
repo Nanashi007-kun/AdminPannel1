@@ -1,5 +1,3 @@
-// AdminPanel.js
-
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './dashboard';
@@ -7,6 +5,7 @@ import Menu from './menumanag';
 import Orders from './orders';
 import Users from './users';
 import Settings from './settings';
+import NavBar from './navbar'; // Import the navigation bar component
 
 // Import CSS
 import '../admincompo/AdminPanel.css'; // Import the main stylesheet
@@ -24,6 +23,7 @@ const AdminPanel = () => {
 
   return (
     <div className="admin-panel">
+      <NavBar /> {/* Include the navigation bar component */}
       <header>
         <div>
           <h1>Admin Panel</h1>
