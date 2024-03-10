@@ -33,8 +33,14 @@ header {
   cursor: pointer;
 }
 
+.mainArea {
+  display: flex;
+}
+
 .menu-sidebar {
   width: 200px;
+  height: 100vh;
+  overflow: hidden;
   background-color: #343a40;
   padding: 20px;
   display: flex;

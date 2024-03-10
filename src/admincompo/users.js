@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Users = () => {
   return (
@@ -7,6 +7,6 @@ const Users = () => {
       {/* Add your user management content here */}
     </div>
   );
-}
+};
 
 export default Users;

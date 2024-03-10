@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Orders = () => {
   return (
@@ -7,6 +7,6 @@ const Orders = () => {
       {/* Add your order management content here */}
     </div>
   );
-}
+};
 
 export default Orders;

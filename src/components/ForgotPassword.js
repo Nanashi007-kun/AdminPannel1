@@ -1,16 +1,20 @@
 // ForgotPassword.js
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleResetPassword = (e) => {
     e.preventDefault();
     // Simulate sending a password reset email
-    console.log('Password reset email sent to:', email);
-    setMessage('If an account exists for ' + email + ', an email will be sent with instructions to reset your password.');
+    console.log("Password reset email sent to:", email);
+    setMessage(
+      "If an account exists for " +
+        email +
+        ", an email will be sent with instructions to reset your password."
+    );
   };
 
   return (
@@ -27,7 +31,9 @@ const ForgotPassword = () => {
             required
           />
         </div>
-        <button type="submit" className="btn">Send Reset Instructions</button>
+        <button type="submit" className="btn">
+          Send Reset Instructions
+        </button>
         {message && <p>{message}</p>}
       </form>
       <Link to="/login">Back to Login</Link>
