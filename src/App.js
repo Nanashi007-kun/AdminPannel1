@@ -1,15 +1,18 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import AdminPanel from "../src/admincompo/AdminPanel";
-// import ForgotPassword from "./components/ForgotPassword";
+import AdminPanel from "../src/admincompo/AdminPanel";
 // import Dashboard from "./admincompo/dashboard";
 // import Menu from "./admincompo/menumanag";
 // import Orders from "./admincompo/orders";
 // import Users from "./admincompo/users";
 // import Settings from "./admincompo/settings";
 import { Home } from "./Login";
-
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { ProtectedRoute } from "./components/protectedRoute";
+import "./App.css";
+import { useEffect, useState } from "react";
 // function App() {
 //   return (
 //     <BrowserRouter>
@@ -19,14 +22,7 @@ import { Home } from "./Login";
 //     </BrowserRouter>
 //   );
 // }
-import { onAuthStateChanged } from "firebase/auth";
 
-import { auth } from "./firebase";
-import { ProtectedRoute } from "./components/protectedRoute";
-import { Private } from "../src/admincompo/AdminPanel";
-
-import "./App.css";
-import { useEffect, useState } from "react";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -54,10 +50,10 @@ function App() {
       <Routes>
         <Route index path="/" element={<Home user={user}></Home>}></Route>
         <Route
-          path="/private"
+          path="/adminpanel/*"
           element={
             <ProtectedRoute user={user}>
-              <Private></Private>
+                <AdminPanel></AdminPanel>
             </ProtectedRoute>
           }
         ></Route>

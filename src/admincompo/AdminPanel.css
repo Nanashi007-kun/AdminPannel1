@@ -1,79 +1,78 @@
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  main {
-    margin-top: 40px;
-  }
-}
+/* admincompo/AdminPanel.css */
 
 .admin-panel {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure the admin panel covers the full height of the viewport */
-}
-
-header {
-  background-color: #343a40;
-  color: #fff;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between; /* Align items horizontally */
-  align-items: center; /* Align items vertically */
-}
-
-.menu-toggle {
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.mainArea {
-  display: flex;
-}
-
-.menu-sidebar {
-  width: 200px;
-  height: 100vh;
-  overflow: hidden;
-  background-color: #343a40;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.menu-sidebar nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-.menu-sidebar nav ul li {
-  margin-bottom: 10px;
-}
-
-.menu-sidebar nav ul li a {
-  color: #f8f9fa;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.menu-sidebar nav ul li a:hover {
-  color: #ced4da;
-}
-
-main {
-  flex: 1;
-  overflow-y: auto; /* Add scrollbar if content overflows */
-  padding: 20px;
-}
-
-footer {
-  background-color: #343a40;
-  color: #fff;
-  padding: 10px 20px;
-}
+    font-family: Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  header button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  
+  header button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .mainArea {
+    flex-grow: 1;
+    display: flex;
+  }
+  
+  nav {
+    background-color: #eee;
+    width: 200px;
+    padding: 20px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-bottom: 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  nav ul li a:hover {
+    color: #f44336;
+  }
+  
+  main {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  

@@ -1,5 +1,3 @@
-// menumanag.js
-
 import React, { useState } from "react";
 import "../admincompo/menumanag.css";
 
@@ -11,9 +9,10 @@ const MenuManag = () => {
   const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  const [productCategory, setProductCategory] = useState("");
+  const [productCategory, setProductCategory] = useState("breakfast"); // Default to breakfast
   const [productImage, setProductImage] = useState(null); // State to store the selected image
   const [openPopup, setOpenPopup] = useState(false);
+  const [editProductIndex, setEditProductIndex] = useState(null); // Index of the product being edited
 
   const addFoodProduct = () => {
     // Check if any field is empty
@@ -21,23 +20,37 @@ const MenuManag = () => {
       !productId ||
       !productName ||
       !productPrice ||
-      !productCategory ||
       !productImage
     ) {
       alert("Please fill in all fields");
       return; // Exit the function early
     }
 
-    // Add the new food product to the list
-    setFoodProducts([
-      ...foodProducts,
-      { productId, productName, productPrice, productCategory, productImage },
-    ]);
+    // If an edit is in progress, update the existing product
+    if (editProductIndex !== null) {
+      const updatedProducts = [...foodProducts];
+      updatedProducts[editProductIndex] = {
+        productId,
+        productName,
+        productPrice,
+        productCategory,
+        productImage,
+      };
+      setFoodProducts(updatedProducts);
+      setEditProductIndex(null);
+    } else {
+      // Add the new food product to the list
+      setFoodProducts([
+        { productId, productName, productPrice, productCategory, productImage },
+        ...foodProducts, // Place the new product at the top
+      ]);
+    }
+
     // Reset the input fields
     setProductId("");
     setProductName("");
     setProductPrice("");
-    setProductCategory("");
+    setProductCategory("breakfast"); // Reset category to breakfast
     setProductImage(null);
     // Close the popup window
     setOpenPopup(false);
@@ -48,6 +61,17 @@ const MenuManag = () => {
     setProductImage(file);
   };
 
+  const handleEdit = (index) => {
+    const product = foodProducts[index];
+    setProductId(product.productId);
+    setProductName(product.productName);
+    setProductPrice(product.productPrice);
+    setProductCategory(product.productCategory);
+    setProductImage(product.productImage);
+    setEditProductIndex(index);
+    setOpenPopup(true);
+  };
+
   return (
     <div className="menu-manag-container">
       <h2>Menu Management</h2>
@@ -55,7 +79,7 @@ const MenuManag = () => {
       <button onClick={() => setOpenPopup(true)}>Add Food Product</button>
       {openPopup && (
         <div className="popup">
-          <h3>Add Food Product</h3>
+          <h3>{editProductIndex !== null ? "Edit" : "Add"} Food Product</h3>
           <input
             type="text"
             value={productId}
@@ -74,12 +98,14 @@ const MenuManag = () => {
             onChange={(e) => setProductPrice(e.target.value)}
             placeholder="Product Price"
           />
-          <input
-            type="text"
+          <select
             value={productCategory}
             onChange={(e) => setProductCategory(e.target.value)}
-            placeholder="Product Category"
-          />
+          >
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+          </select>
           <input type="file" accept="image/*" onChange={handleImageChange} />
           {productImage && (
             <img
@@ -89,7 +115,9 @@ const MenuManag = () => {
               className="preview-image"
             />
           )}
-          <button onClick={addFoodProduct}>Add</button>
+          <button onClick={addFoodProduct}>
+            {editProductIndex !== null ? "Save" : "Add"}
+          </button>
           <button onClick={() => setOpenPopup(false)}>Cancel</button>
         </div>
       )}
@@ -107,6 +135,7 @@ const MenuManag = () => {
                 className="product-image"
               />
             )}
+            <button onClick={() => handleEdit(index)}>Edit</button>
           </div>
         ))}
       </div>

@@ -3,7 +3,7 @@
 
 .dashboard-container {
     width: 100%;
-    max-width: 800px; /* Adjust this value as needed */
+    max-width: 800px; 
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -22,4 +22,9 @@
     width: 100%;
     height: 300px;
   }
+  .dashboard-container {
+    max-height: 100vh; /* Set maximum height to viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
   
