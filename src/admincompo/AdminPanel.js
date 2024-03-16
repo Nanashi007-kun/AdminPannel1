@@ -1,13 +1,13 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
-import Menu from "./menumanag";
-import Orders from "./orders";
+import Menu from "../admincompo/menumanag";
+import Orders from "../admincompo/orders";
 import Users from "./users";
-import Settings from "./settings";
+import Settings from "../admincompo/settings";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
-import Dashboard from "./dashboard";
+import Dashboard from "../admincompo/dashboard";
 
 import "../admincompo/AdminPanel.css"; // Import the main stylesheet
 const AdminPanel = () => {
@@ -23,9 +23,9 @@ const AdminPanel = () => {
 
   return (
     <div className="admin-panel">
-      <header>
-        <div>
-          <h1>Admin Panel</h1>
+      <header className="header">
+        <div className="header-content">
+          <h1 className="header-title">Admin Panel</h1>
           <button onClick={handleSignOut}>Sign Out</button>
         </div>
       </header>

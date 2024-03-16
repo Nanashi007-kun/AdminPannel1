@@ -13,6 +13,7 @@ import { auth } from "./firebase";
 import { ProtectedRoute } from "./components/protectedRoute";
 import "./App.css";
 import { useEffect, useState } from "react";
+import { generateToken } from "./firebase";
 // function App() {
 //   return (
 //     <BrowserRouter>
@@ -27,11 +28,17 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
+
+  //for nortification 
+  useEffect(() => {
+    generateToken();
+  }, []);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
         setIsFetching(false);
+
         return;
       }
 
@@ -42,7 +49,8 @@ function App() {
   }, []);
 
   if (isFetching) {
-    return <h2>Loading...</h2>;
+    return <h2>Loading...</h2>
+  ;
   }
 
   return (

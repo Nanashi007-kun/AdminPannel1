@@ -170,7 +170,7 @@ export const Home = ({ user }) => {
           </button>
         </>
       )}
-    </form>
+          </form>
   );
 };
 
