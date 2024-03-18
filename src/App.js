@@ -11,9 +11,10 @@ import { Home } from "./Login";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { ProtectedRoute } from "./components/protectedRoute";
+import { onMessage } from "firebase/messaging"
 import "./App.css";
 import { useEffect, useState } from "react";
-import { generateToken } from "./firebase";
+import { generateToken , messaging} from "./firebase";
 // function App() {
 //   return (
 //     <BrowserRouter>
@@ -32,6 +33,10 @@ function App() {
   //for nortification 
   useEffect(() => {
     generateToken();
+    onMessage(messaging, (payload) =>{
+      console.log(payload);
+      alert("New Order!");
+    })
   }, []);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

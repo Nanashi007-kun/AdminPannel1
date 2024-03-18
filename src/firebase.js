@@ -17,12 +17,12 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-const messaging = getMessaging(app);
+export const messaging = getMessaging(app);
 
 export const generateToken = async () => {
   const Permission = await Notification.requestPermission();
   console.log(Permission);
-  if (Permission === "geanted") {
+  if (Permission === "granted") {
     const token = await getToken(messaging, {
       vapidKey: "BFSk21y-sNxTR2VsGx08LugpiSPvenIxUWV44vUvmthl4UrMrpBMb2AFq2KIrlnDyKxb00xKY3kDYKCTixK-L68"
     });
