@@ -11,44 +11,48 @@ import Dashboard from "../admincompo/dashboard";
 
 import "../admincompo/AdminPanel.css"; // Import the main stylesheet
 const AdminPanel = () => {
-
- 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => console.log("Sign Out"))
       .catch((error) => console.log(error));
   };
 
-  
-
   return (
     <div className="admin-panel">
       <header className="header">
         <div className="header-content">
           <h1 className="header-title">Admin Panel</h1>
-          <button onClick={handleSignOut}>Sign Out</button>
+          <button
+            className="signout"
+            clip-rule="evenodd"
+            fill-rule="evenodd"
+            onClick={handleSignOut}
+          >
+            Sign Out
+            
+          </button>
         </div>
       </header>
       <div className="mainArea">
-          <nav>
-            <ul>
-              <li>
-                <Link to="/adminPanel/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/adminPanel/menu">Menu Management</Link>
-              </li>
-              <li>
-                <Link to="/adminPanel/orders">Order Management</Link>
-              </li>
-              <li>
-                <Link to="/adminPanel/users">User Management</Link>
-              </li>
-              <li>
-                <Link to="/adminPanel/settings">Settings</Link>
-              </li>
-            </ul>
-          </nav>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/adminPanel/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/adminPanel/menu">Menu Management</Link>
+            </li>
+            <li>
+              <Link to="/adminPanel/orders">Order Management</Link>
+            </li>
+            <li>
+              <Link to="/adminPanel/users">User Management</Link>
+            </li>
+            <li>
+              <Link to="/adminPanel/settings">Settings</Link>
+            </li>
+          </ul>
+        </nav>
         <main>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />

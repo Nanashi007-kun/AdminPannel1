@@ -96,7 +96,9 @@ export const Home = ({ user }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        setError("Failed to send password reset email. Please try again later.");
+        setError(
+          "Failed to send password reset email. Please try again later."
+        );
       });
   };
 
@@ -122,7 +124,11 @@ export const Home = ({ user }) => {
 
   return (
     <form className="form">
-      {isSignUpActive ? <legend className="form-title">Sign Up</legend> : <legend className="form-title">Sign In</legend>}
+      {isSignUpActive ? (
+        <legend className="form-title">Sign Up</legend>
+      ) : (
+        <legend className="form-title">Sign In</legend>
+      )}
       <fieldset>
         <div className="input-container">
           <label htmlFor="email">Email:</label>
@@ -145,7 +151,8 @@ export const Home = ({ user }) => {
             onChange={handlePasswordChange}
           />
         </div>
-        {error && <p className="error-message">{error}</p>} {/* Display validation error message */}
+        {error && <p className="error-message">{error}</p>}{" "}
+        {/* Display validation error message */}
         {isSignUpActive ? (
           <button className="submit" type="button" onClick={handleSignUp}>
             Sign Up
@@ -161,16 +168,11 @@ export const Home = ({ user }) => {
           Login
         </button>
       ) : (
-        <>
-          <button className="submit" onClick={handleMethodChange}>
-            Create an account
-          </button>
-          <button className="submit" onClick={handleForgotPassword}>
-            Forgot Password?
-          </button>
-        </>
+        <button className="forgot-password" onClick={handleForgotPassword}>
+          Forgot Password?
+        </button>
       )}
-          </form>
+    </form>
   );
 };
 
