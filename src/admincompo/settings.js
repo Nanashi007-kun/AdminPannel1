@@ -73,6 +73,7 @@ const Settings = () => {
     return re.test(email);
   };
 
+
   const handleClosePopup = () => {
     setShowSignupPopup(false);
     setShowResetPopup(false);
@@ -87,8 +88,38 @@ const Settings = () => {
       <h1>Settings Page</h1>
       {showSignupPopup && (
         <div className="modal active">
+          {" "}
+          {/* Add the 'active' class here */}
           <div className="modal-content">
-            {/* Your signup pop-up content goes here */}
+            <button className="close-btn" onClick={handleClosePopup}>
+              &times;
+            </button>
+            <div className="input-container">
+              <label htmlFor="resetEmail">Email:</label>
+              <input
+                className="text"
+                type="text"
+                id="resetEmail"
+                name="resetEmail"
+                placeholder="Enter email"
+                value={resetEmail}
+                onChange={handleInputChange}
+              />
+              <div className="input-container">
+          <label htmlFor="password">Password:</label>
+          <input
+            placeholder="Enter password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={createUserWithEmailAndPassword}
+          />
+        </div>
+            </div>
+            {error && <p className="error-message">{error}</p>}
+            <button className="submit" onClick={ handleResetConfirmAction}>
+              Confirm
+            </button>
           </div>
         </div>
       )}
