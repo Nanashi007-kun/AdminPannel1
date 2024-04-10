@@ -8,6 +8,7 @@ import Settings from "../admincompo/settings";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import Dashboard from "../admincompo/dashboard";
+import Sidebar from "./addfooditem/Slidebar/slidebar";
 
 import "../admincompo/AdminPanel.css"; // Import the main stylesheet
 const AdminPanel = () => {
@@ -65,7 +66,11 @@ const AdminPanel = () => {
             <li>
               <Link to="/adminPanel/settings">Settings</Link>
             </li>
+            <li>
+              <Link to="/adminPanel/slidebar">Slidebar</Link>
+            </li>
           </ul>
+          
         </nav>
         <main>
           <Routes>
@@ -74,6 +79,7 @@ const AdminPanel = () => {
             <Route path="/orders" element={<Orders />} />
             <Route path="/users" element={<Users />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<Sidebar/>}/>
           </Routes>
         </main>
       </div>
