@@ -9,6 +9,8 @@ import Users from "./users";
 import Settings from "../admincompo/settings";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { useState } from 'react';
+
 import Dashboard from "../admincompo/dashboard";
 import Sidebar from "./addfooditem/Slidebar/slidebar";
 import Cards from "./cards/cards";
@@ -19,7 +21,9 @@ const AdminPanel = () => {
     signOut(auth)
       .then(() => console.log("Sign Out"))
       .catch((error) => console.log(error));
+      
   };
+
 
   return (
     <div className="container">
@@ -32,30 +36,41 @@ const AdminPanel = () => {
           <p className=" title">web devlopmenrr</p>
         </div>
 
-        <nav>
+        <nav className="menu">
           <ul className="title">
-            <li>
-              <AiOutlineDashboard />
-              <Link to="/adminPanel/dashboard">Dashboard</Link>
+            <li className="active">
+              {/* <Link to="/adminPanel/dashboard" >  */}
+              <span  className="text"> Dashboard</span>
+              {/* </Link> */}
             </li>
-            <li>
-            <MdOutlineManageSearch />
-              <Link to="/adminPanel/menu">Menu Management</Link>
+            <li >
+             <ul className="sub-menu">
+              <li>
+                <Link to="/adminPanel/menu" className="text"> Menu Management</Link>
+              </li>
+             </ul>
             </li>
-            <li>
-              <Link to="/adminPanel/orders">Order Management</Link>
+            <li >
+              <Link to="/adminPanel/menu" className="text"> Menu Management</Link>
             </li>
-            <li>
+            <li >
+              <Link to="/adminPanel/orders" >Order Management</Link>
+            </li>
+            <li >
               <Link to="/adminPanel/users">User Management</Link>
             </li>
-            <li>
+            <li >
               <Link to="/adminPanel/settings">Settings</Link>
             </li>
           </ul>
+          
         </nav>
       </div>
+      
       <div>
-        <main>
+
+      </div>
+      <main>
           <Routes>
             <Route part="/" element={<Cards />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -65,7 +80,6 @@ const AdminPanel = () => {
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
-      </div>
     </div>
   );
 };
