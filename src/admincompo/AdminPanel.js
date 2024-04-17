@@ -51,7 +51,7 @@ const AdminPanel = () => {
         <nav>
           <ul>
             <li>
-              <Link to="/adminPanel/dashboard">Dashboard</Link>
+              <Link to="/adminPanel/dashboard">Dafshboard</Link>
             </li>
             <li>
               <Link to="/adminPanel/menu">Menu Management</Link>
@@ -73,7 +73,7 @@ const AdminPanel = () => {
             <Route path="/menu" element={<Menu />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/users" element={<Users />} />
-            
+
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
