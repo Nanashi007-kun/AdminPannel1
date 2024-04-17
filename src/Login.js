@@ -49,8 +49,9 @@ export const Home = ({ user }) => {
       });
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = (  ) => {
     // Email validation
+   
     if (!email.trim() || !password.trim()) {
       setError("Email and password are required.");
       return;
@@ -61,12 +62,14 @@ export const Home = ({ user }) => {
     }
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        
         navigate("/adminpanel");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        
         if (
           errorCode === "auth/user-not-found" ||
           errorCode === "auth/wrong-password"

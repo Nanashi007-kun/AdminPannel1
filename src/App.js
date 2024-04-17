@@ -7,6 +7,7 @@ import AdminPanel from "../src/admincompo/AdminPanel";
 // import Orders from "./admincompo/orders";
 // import Users from "./admincompo/users";
 // import Settings from "./admincompo/settings";
+import Preloader from "./components/preloader";
 import { Home } from "./Login";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -54,13 +55,16 @@ function App() {
   }, []);
 
   if (isFetching) {
-    return <h2>Loading...</h2>
+    return    <Preloader/>
   ;
   }
 
   return (
+    <>
+    {/* <Preloader/> */}
     <BrowserRouter>
       <Routes>
+        
         <Route index path="/" element={<Home user={user}></Home>}></Route>
         <Route
           path="/adminpanel/*"
@@ -72,6 +76,7 @@ function App() {
         ></Route>
       </Routes>
     </BrowserRouter>
+    </>
   );
 }
 
