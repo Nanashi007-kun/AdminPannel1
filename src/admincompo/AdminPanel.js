@@ -73,12 +73,13 @@ const AdminPanel = () => {
             <Route path="/menu" element={<Menu />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/users" element={<Users />} />
+            
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
       </div>
       <footer>
-        <p>© 2024 Canteen Management System. All rights reserved.</p>
+        <p>© 2024 Canteen Management System. All rights reserved</p>
       </footer>
     </div>
   );
