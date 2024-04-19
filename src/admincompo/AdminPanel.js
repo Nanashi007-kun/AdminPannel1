@@ -73,7 +73,6 @@ const AdminPanel = () => {
             <Route path="/menu" element={<Menu />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/users" element={<Users />} />
-
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
