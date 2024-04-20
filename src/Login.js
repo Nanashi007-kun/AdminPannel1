@@ -152,7 +152,6 @@ export const Home = ({ user }) => {
           />
         </div>
         {error && <p className="error-message">{error}</p>}{" "}
-        {/* Display validation error message */}
         {isSignUpActive ? (
           <button className="submit" type="button" onClick={handleSignUp}>
             Sign Up
