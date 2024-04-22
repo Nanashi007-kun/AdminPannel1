@@ -1,33 +1,72 @@
-*{
-  margin: 0;
-  margin: 0;
-  margin-left: 0px;
-  margin-right: 0px;
+/* AdminPanel.css */
 
-
-  box-sizing: border-box;
-
-}
-
-.admin-panel{  margin-left: 0px;
-  margin-right: 0px;
-
-  background-color: #5b6677;
-}
-
-.container{
-  width: 100%;
-  min-width: 100vh;
-  margin-left: 0px;
-  margin-right: 0px;
-}
-.sidebar{
-  width: 256px;
-  height: 100vh;
-  margin-left: 0px;
-  margin-right: 0px;
+.admin-panel {
   display: flex;
   flex-direction: column;
-  justify-content: left;
-  background-color: #fff;
+  height: 100vh;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  margin: 0;
+}
+
+.mainArea {
+  display: flex;
+  flex: 1;
+}
+
+nav {
+  flex: 0 0 200px;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  margin-bottom: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.signout {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  text-decoration: underline;
+}
+
+.signout:hover {
+  color: #666;
 }

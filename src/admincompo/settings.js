@@ -1,160 +1,77 @@
 import React, { useState } from "react";
 import { auth } from "../firebase";
+
 import {
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail, // Import the function for sending password reset emails
 } from "firebase/auth";
 import "../admincompo/settings.css"; // Import the CSS file for styling
 
 const Settings = () => {
+  const [error,setError] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [resetEmail, setResetEmail] = useState("");
-  const [error, setError] = useState("");
-  const [showSignupPopup, setShowSignupPopup] = useState(false);
-  const [showResetPopup, setShowResetPopup] = useState(false);
+const [password, setPassword] = useState("");
+const [errorMessage, setErrorMessage] = useState('');
 
-  const handleNewUserSignup = () => {
-    setShowSignupPopup(true);
+  const handleSignUp = () => {
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+
+        setError(true);
+   
+      });
   };
+  // const [model, setModel] = useState(false);
 
-  const handleResetPassword = () => {
-    setShowResetPopup(true);
-  };
+  // const toggleModel = () => {
+  //   setModel(!model);
+  // };
 
-  const handleSignupConfirmAction = async () => {
-    try {
-      if (!email.trim() || !password.trim()) {
-        setError("Email and password are required.");
-        return;
-      }
-      if (!isValidEmail(email)) {
-        setError("Please enter a valid email address.");
-        return;
-      }
-      // Your existing signup logic goes here...
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  const handleResetConfirmAction = async () => {
-    try {
-      if (!resetEmail.trim()) {
-        setError("Email is required.");
-        return;
-      }
-      if (!isValidEmail(resetEmail)) {
-        setError("Please enter a valid email address.");
-        return;
-      }
-      await sendPasswordResetEmail(auth, resetEmail);
-      setError("Password reset email sent. Please check your inbox.");
-      setShowResetPopup(false); // Hide reset pop-up after sending reset email
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "email") {
-      setEmail(value);
-    } else if (name === "password") {
-      setPassword(value);
-    } else if (name === "resetEmail") {
-      setResetEmail(value);
-    }
-    setError(""); // Clear any previous error messages
-  };
-
-  const isValidEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
-
-
-  const handleClosePopup = () => {
-    setShowSignupPopup(false);
-    setShowResetPopup(false);
-    setEmail("");
-    setPassword("");
-    setResetEmail("");
-    setError("");
-  };
-
+  // if (model) {
+  //   document.body.classList.add("active-modl");
+  // } else {
+  //   document.body.classList.remove("active-modl");
+  // }
   return (
-    <div>
-      <h1>Settings Page</h1>
-      {showSignupPopup && (
-        <div className="modal active">
-          {" "}
-          {/* Add the 'active' class here */}
-          <div className="modal-content">
-            <button className="close-btn" onClick={handleClosePopup}>
-              &times;
-            </button>
-            <div className="input-container">
-              <label htmlFor="resetEmail">Email:</label>
-              <input
-                className="text"
-                type="text"
-                id="resetEmail"
-                name="resetEmail"
-                placeholder="Enter email"
-                value={resetEmail}
-                onChange={handleInputChange}
-              />
-              <div className="input-container">
+    <div className="Main">
+     <form className="login" >
+      <fieldset>
+        <div className="input-container">
+          <label htmlFor="email">Email:</label>
+          <input
+            
+            type="email"
+            id="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="input-container">
           <label htmlFor="password">Password:</label>
           <input
             placeholder="Enter password"
             type="password"
             id="password"
             value={password}
-            onChange={createUserWithEmailAndPassword}
+            onChange={(e) => setPassword(e.target.value)}
+            
           />
+          
         </div>
-            </div>
-            {error && <p className="error-message">{error}</p>}
-            <button className="submit" onClick={ handleResetConfirmAction}>
-              Confirm
-            </button>
-          </div>
-        </div>
-      )}
-      {showResetPopup && (
-        <div className="modal active">
-          <div className="modal-content">
-            <button className="close-btn" onClick={handleClosePopup}>
-              &times;
-            </button>
-            <div className="input-container">
-              <label htmlFor="resetEmail">Email:</label>
-              <input
-                className="text"
-                type="text"
-                id="resetEmail"
-                name="resetEmail"
-                placeholder="Enter email"
-                value={resetEmail}
-                onChange={handleInputChange}
-              />
-            </div>
-            {error && <p className="error-message">{error}</p>}
-            <button className="submit" onClick={handleResetConfirmAction}>
-              Confirm
-            </button>
-          </div>
-        </div>
-      )}
-      {/* Your buttons for signup and reset password */}
-      <button className="submit" onClick={handleNewUserSignup}>
-        New User Signup
-      </button>
-      <button className="submit" onClick={handleResetPassword}>
-        Reset Password
-      </button>
+        <button className="submit" type="button"onClick={handleSignUp} >
+          
+          Login
+        </button>
+        {error && <span>wrong email or password </span>}
+      </fieldset>
+    </form>
     </div>
   );
 };

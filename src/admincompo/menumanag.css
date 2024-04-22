@@ -1,81 +1,42 @@
-/* menumanag.css */
 
-.menu-manag-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.popup {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.food-products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.food-product {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.product-image {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-}
-
-.menu-manag-container h2 {
-  text-align: center;
-}
-
-.popup h3 {
-  margin-top: 0;
-}
-
-.popup input[type="text"],
-.popup select {
-  width: 100%;
+/* Styles for the heading */
+h2 {
+  font-size: 24px;
   margin-bottom: 10px;
+}
+
+/* Styles for the form */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Styles for labels */
+label {
+  font-weight: bold;
+}
+
+/* Styles for inputs */
+input {
+  width: 100%;
   padding: 8px;
-  border-radius: 5px;
   border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.popup button {
-  background-color: #4caf50;
+/* Styles for the submit button */
+button {
+  padding: 8px 16px;
+  background-color: #007bff;
   color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  margin-right: 10px;
 }
 
-.popup button:hover {
-  background-color: #45a049;
-}
-
-.popup button:last-child {
-  background-color: #f44336;
-}
-
-.popup button:last-child:hover {
-  background-color: #d32f2f;
-}
-
-.preview-image {
-  margin-top: 10px;
-  display: block;
-}
-
-.popup button {
-  margin-top: 10px;
+/* Styles for the submit button on hover */
+button:hover {
+  background-color: #0056b3;
 }

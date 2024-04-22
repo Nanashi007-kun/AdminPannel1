@@ -1,143 +1,152 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../admincompo/menumanag.css";
+import { addDoc, collection, getDocs, doc, updateDoc, deleteDoc, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase";
 
 const MenuManag = () => {
-  // State for managing the list of food products
-  const [foodProducts, setFoodProducts] = useState([]);
+  const [foodId, setFoodId] = useState("");
+  const [foodName, setFoodName] = useState("");
+  const [foodDetails, setFoodDetails] = useState("");
+  const [foodPrice, setFoodPrice] = useState("");
+  const [foodServes, setFoodServes] = useState("");
+  const [foodItems, setFoodItems] = useState([]);
 
-  // State for managing the input fields in the popup
-  const [productId, setProductId] = useState("");
-  const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState("");
-  const [productCategory, setProductCategory] = useState("breakfast"); // Default to breakfast
-  const [productImage, setProductImage] = useState(null); // State to store the selected image
-  const [openPopup, setOpenPopup] = useState(false);
-  const [editProductIndex, setEditProductIndex] = useState(null); // Index of the product being edited
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "foodItems"), (snapshot) => {
+      const updatedFoodItems = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id
+      }));
+      setFoodItems(updatedFoodItems);
+    });
 
-  const addFoodProduct = () => {
-    // Check if any field is empty
-    if (
-      !productId ||
-      !productName ||
-      !productPrice ||
-      !productImage
-    ) {
-      alert("Please fill in all fields");
-      return; // Exit the function early
+    return () => unsubscribe();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await addDoc(collection(db, "foodItems"), {
+        foodId: foodId,
+        foodName: foodName,
+        foodDetails: foodDetails,
+        foodPrice: foodPrice,
+        foodServes: foodServes,
+      });
+      clearFormFields();
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
-
-    // If an edit is in progress, update the existing product
-    if (editProductIndex !== null) {
-      const updatedProducts = [...foodProducts];
-      updatedProducts[editProductIndex] = {
-        productId,
-        productName,
-        productPrice,
-        productCategory,
-        productImage,
-      };
-      setFoodProducts(updatedProducts);
-      setEditProductIndex(null);
-    } else {
-      // Add the new food product to the list
-      setFoodProducts([
-        { productId, productName, productPrice, productCategory, productImage },
-        ...foodProducts, // Place the new product at the top
-      ]);
-    }
-
-    // Reset the input fields
-    setProductId("");
-    setProductName("");
-    setProductPrice("");
-    setProductCategory("breakfast"); // Reset category to breakfast
-    setProductImage(null);
-    // Close the popup window
-    setOpenPopup(false);
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setProductImage(file);
+  const handleEdit = async (id) => {
+    const foodItemRef = doc(db, "foodItems", id);
+
+    try {
+      await updateDoc(foodItemRef, {
+        foodName: foodName,
+        foodDetails: foodDetails,
+        foodPrice: foodPrice,
+        foodServes: foodServes,
+      });
+    } catch (e) {
+      console.error("Error updating document: ", e);
+    }
   };
 
-  const handleEdit = (index) => {
-    const product = foodProducts[index];
-    setProductId(product.productId);
-    setProductName(product.productName);
-    setProductPrice(product.productPrice);
-    setProductCategory(product.productCategory);
-    setProductImage(product.productImage);
-    setEditProductIndex(index);
-    setOpenPopup(true);
+  const handleDelete = async (id) => {
+    const foodItemRef = doc(db, "foodItems", id);
+
+    try {
+      await deleteDoc(foodItemRef);
+    } catch (e) {
+      console.error("Error deleting document: ", e);
+    }
+  };
+
+  const clearFormFields = () => {
+    setFoodId("");
+    setFoodName("");
+    setFoodDetails("");
+    setFoodPrice("");
+    setFoodServes("");
   };
 
   return (
-    <div className="menu-manag-container">
-      <h2>Menu Management</h2>
+    <div>
+      <h2>Menu Manager</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="foodId">Food ID:</label>
+        <input
+          type="text"
+          id="foodId"
+          value={foodId}
+          onChange={(e) => setFoodId(e.target.value)}
+        />
+        <label htmlFor="foodName">Food Name:</label>
+        <input
+          type="text"
+          id="foodName"
+          value={foodName}
+          onChange={(e) => setFoodName(e.target.value)}
+        />
+        <label htmlFor="foodDetails">Food Details:</label>
+        <input
+          type="text"
+          id="foodDetails"
+          value={foodDetails}
+          onChange={(e) => setFoodDetails(e.target.value)}
+        />
+        <label htmlFor="foodPrice">Food Price:</label>
+        <input
+          type="text"
+          id="foodPrice"
+          value={foodPrice}
+          onChange={(e) => setFoodPrice(e.target.value)}
+        />
+        <label htmlFor="foodServes">Food Serves:</label>
+        <input
+          type="text"
+          id="foodServes"
+          value={foodServes}
+          onChange={(e) => setFoodServes(e.target.value)}
+        />
+        <button type="submit">Add Food Item</button>
+      </form>
 
-      <button onClick={() => setOpenPopup(true)}>Add Food Product</button>
-      {openPopup && (
-        <div className="popup">
-          <h3>{editProductIndex !== null ? "Edit" : "Add"} Food Product</h3>
-          <input
-            type="text"
-            value={productId}
-            onChange={(e) => setProductId(e.target.value)}
-            placeholder="Product ID"
-          />
-          <input
-            type="text"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            placeholder="Product Name"
-          />
-          <input
-            type="text"
-            value={productPrice}
-            onChange={(e) => setProductPrice(e.target.value)}
-            placeholder="Product Price"
-          />
-          <select
-            value={productCategory}
-            onChange={(e) => setProductCategory(e.target.value)}
-          >
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-          </select>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-          {productImage && (
-            <img
-              src={URL.createObjectURL(productImage)}
-              alt="Preview"
-              width="100"
-              className="preview-image"
-            />
-          )}
-          <button onClick={addFoodProduct}>
-            {editProductIndex !== null ? "Save" : "Add"}
-          </button>
-          <button onClick={() => setOpenPopup(false)}>Cancel</button>
-        </div>
-      )}
-      <div className="food-products">
-        {foodProducts.map((product, index) => (
-          <div key={index} className="food-product">
-            <p>Product ID: {product.productId}</p>
-            <p>Product Name: {product.productName}</p>
-            <p>Product Price: {product.productPrice}</p>
-            <p>Product Category: {product.productCategory}</p>
-            {product.productImage && (
-              <img
-                src={URL.createObjectURL(product.productImage)}
-                alt="Product"
-                className="product-image"
-              />
-            )}
-            <button onClick={() => handleEdit(index)}>Edit</button>
-          </div>
-        ))}
+      <div>
+        <h2>Food Items</h2>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Food ID</th>
+              <th>Food Name</th>
+              <th>Food Details</th>
+              <th>Food Price</th>
+              <th>Food Serves</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {foodItems.map((foodItem) => (
+              <tr key={foodItem.id}>
+                <td>{foodItem.foodId}</td>
+                <td>{foodItem.foodName}</td>
+                <td>{foodItem.foodDetails}</td>
+                <td>{foodItem.foodPrice}</td>
+                <td>{foodItem.foodServes}</td>
+                <td>
+                  <button onClick={() => handleEdit(foodItem.id)}>Edit</button>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(foodItem.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
