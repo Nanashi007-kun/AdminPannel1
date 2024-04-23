@@ -9,22 +9,19 @@ import {
 import "../admincompo/settings.css"; // Import the CSS file for styling
 
 const Settings = () => {
-  const [error,setError] = useState(false);
+  const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [errorMessage, setErrorMessage] = useState('');
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSignUp = () => {
-
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
       })
       .catch((error) => {
-
         setError(true);
-   
       });
   };
   // const [model, setModel] = useState(false);
@@ -40,38 +37,34 @@ const [errorMessage, setErrorMessage] = useState('');
   // }
   return (
     <div className="Main">
-     <form className="login" >
-      <fieldset>
-        <div className="input-container">
-          <label htmlFor="email">Email:</label>
-          <input
-            
-            type="email"
-            id="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <label htmlFor="password">Password:</label>
-          <input
-            placeholder="Enter password"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            
-          />
-          
-        </div>
-        <button className="submit" type="button"onClick={handleSignUp} >
-          
-          Login
-        </button>
-        {error && <span>wrong email or password </span>}
-      </fieldset>
-    </form>
+      <form className="login">
+        <fieldset>
+          <div className="input-container">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <label htmlFor="password">Password:</label>
+            <input
+              placeholder="Enter password"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button className="submit" type="button" onClick={handleSignUp}>
+            Login
+          </button>
+          {error && <span>wrong email or password </span>}
+        </fieldset>
+      </form>
     </div>
   );
 };
