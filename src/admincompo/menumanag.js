@@ -40,20 +40,20 @@ const MenuManag = () => {
     }
   };
 
-  const handleEdit = async (id) => {
-    const foodItemRef = doc(db, "foodItems", id);
+  // const handleEdit = async (id) => {
+  //   const foodItemRef = doc(db, "foodItems", id);
 
-    try {
-      await updateDoc(foodItemRef, {
-        foodName: foodName,
-        foodDetails: foodDetails,
-        foodPrice: foodPrice,
-        foodServes: foodServes,
-      });
-    } catch (e) {
-      console.error("Error updating document: ", e);
-    }
-  };
+  //   try {
+  //     await updateDoc(foodItemRef, {
+  //       foodName: foodName,
+  //       foodDetails: foodDetails,
+  //       foodPrice: foodPrice,
+  //       foodServes: foodServes,
+  //     });
+  //   } catch (e) {
+  //     console.error("Error updating document: ", e);
+  //   }
+  // };
 
   const handleDelete = async (id) => {
     const foodItemRef = doc(db, "foodItems", id);
