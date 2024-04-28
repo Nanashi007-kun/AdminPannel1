@@ -1,0 +1,103 @@
+/* Container styles */
+.add-food-item {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Heading styles */
+.add-food-item h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Form styles */
+.add-food-item form {
+  margin-bottom: 20px;
+}
+
+.add-food-item form div {
+  margin-bottom: 15px;
+}
+
+.add-food-item form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.add-food-item form input[type="text"],
+.add-food-item form input[type="number"],
+.add-food-item form textarea,
+.add-food-item form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.add-food-item form select {
+  appearance: none;
+}
+
+.add-food-item form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-food-item form button:hover {
+  background-color: #0056b3;
+}
+
+/* Table styles */
+.add-food-item table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.add-food-item th,
+.add-food-item td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.add-food-item th {
+  background-color: #f2f2f2;
+}
+
+.add-food-item tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.add-food-item tr:hover {
+  background-color: #ddd;
+}
+
+/* Image styles */
+.add-food-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Toast notification styles */
+.react-toastify-toast {
+  border-radius: 5px;
+}
+
+.react-toastify__toast--success {
+  background-color: #28a745;
+}
+
+.react-toastify__toast--error {
+  background-color: #dc3545;
+}

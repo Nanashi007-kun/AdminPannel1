@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link,Navigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 import Menu from "../admincompo/menumanag";
 import Orders from "../admincompo/orders";
@@ -15,11 +15,11 @@ const AdminPanel = () => {
     signOut(auth)
       .then(() => console.log("Sign Out"))
       .catch((error) => console.log(error));
-      <Navigate to= "/login"/>
+    <Navigate to="/login" />
   };
 
   return (
-<div className="admin-panel">
+    <div className="admin-panel">
       <header className="header">
         <div className="header-content">
           <h1 className="header-title">Admin Panel</h1>
@@ -45,15 +45,17 @@ const AdminPanel = () => {
               <Link to="/adminPanel/settings">Settings</Link>
             </li>
             <li>
-              <button
-                className="signout"
-                clipRule="evenodd"
-                fillule="evenodd"
-                onClick={handleSignOut}
-              >
-                Sign Out
-              </button>
             </li>
+          </ul>
+          <ul className="signUpbtn">
+            <button
+              className="signout"
+              clipRule="evenodd"
+              fillule="evenodd"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </button>
           </ul>
         </nav>
         <main>

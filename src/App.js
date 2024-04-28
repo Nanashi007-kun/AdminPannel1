@@ -6,7 +6,6 @@ import { Login } from "./Login";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { ProtectedRoute } from "./components/protectedRoute";
-
 import "./App.css";
 import { useEffect, useState } from "react";
 
