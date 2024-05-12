@@ -94,6 +94,7 @@ const Settings = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                {error && <span>{errorMessage}</span>}
                 </div>
                 <button
                   className="submit"
@@ -102,7 +103,6 @@ const Settings = () => {
                 >
                   Create User
                 </button>
-                {error && <span>{errorMessage}</span>}
               </fieldset>
             </form>
           </div>

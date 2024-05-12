@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css"; // Import styles
 
 const Orders = () => {
   const [foodItems, setFoodItems] = useState([]);
-  
+
   const formRef = useRef(null); // Using useRef hook
   const [newFoodData, setNewFoodData] = useState({
     foodId: "",
@@ -99,7 +99,6 @@ const Orders = () => {
     return unsubscribe;
   }, []);
 
-  
   const handleEdit = async (id) => {
     const foodDoc = doc(firestore, "foodItems", id);
     const foodSnapshot = await getDoc(foodDoc);
@@ -118,18 +117,19 @@ const Orders = () => {
       toast.error("Error adding food item!");
     }
   };
+  
 
   const handleDelete = async (id) => {
-    const foodDoc = doc(firestore, "foodItems", id);
+    const foodDoc = doc(firestore, "foodItems", id);  
     await deleteDoc(foodDoc);
-    toast.error("Item delated");
+    toast("Item delated");
   };
 
   return (
     <div className="add-food-item">
       <ToastContainer />
       <h2>Add Food Item</h2>
-      <form  ref={formRef} onSubmit={addFoodItem}>
+      <form ref={formRef} onSubmit={addFoodItem}>
         <div>
           <label htmlFor="foodName">Food Name:</label>
           <input
@@ -220,6 +220,7 @@ const Orders = () => {
             <th>Serve</th>
             <th>Category</th>
             <th>Actions</th>
+
           </tr>
         </thead>
         <tbody>
@@ -232,7 +233,8 @@ const Orders = () => {
               <td>{foodItem.foodServe}</td>
               <td>{foodItem.foodCategory}</td>
               <td>
-                <button onClick={() => handleEdit(foodItem.id)}>Edit</button>
+                {/* <button onClick={() => handleEdit(foodItem.id)}>Edit</button> */}
+
                 <button onClick={() => handleDelete(foodItem.id)}>
                   Delete
                 </button>

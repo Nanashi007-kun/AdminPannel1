@@ -24,7 +24,7 @@ export const Login = ({ user }) => {
     return regex.test(email);
   };
   const validatePassword = (password) => {
-    return password.length >= 8;
+    // return password.length >= 8;
   };
 
   const handleForgotPassword = async (e) => {
