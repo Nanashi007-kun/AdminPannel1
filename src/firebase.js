@@ -6,6 +6,9 @@ import { getStorage } from "firebase/storage";
 import { onSnapshot } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
 
+import 'firebase/compat/database';
+import 'firebase/compat/storage';
+
 // Import `child` directly from `firebase/storage` (no need for re-export)
 import { child } from "firebase/storage";
 
@@ -36,6 +39,7 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const messaging = getMessaging(app);
+
 export const firestore = getFirestore(app);
 
 export { ref };
